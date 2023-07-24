@@ -4,7 +4,7 @@ In order to build the containers on your system first clone the repository. For 
 
 
 ```bash
-git clone https://github.com/danchitnis/container-xrdp.git
+git clone https://github.com/chrisbensch/container-xrdp.git
 cd container-xrdp
 ```
 
