@@ -1,6 +1,6 @@
-# https://github.com/chrisbensch/docker-ubuntu-xrdp
+# https://github.com/chrisbensch/docker-debian-xrdp
 
-FROM ubuntu:latest
+FROM debian:bookworm-slim
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -22,6 +22,9 @@ RUN apt-get -y update && \
     wget \
     vim \
     mousepad \
+    firefox-esr \
+    dbus-x11 \
+    lsb-release \
     xorgxrdp \
     xrdp && \
     apt remove -y light-locker xscreensaver && \
@@ -33,17 +36,17 @@ RUN mv /usr/bin/ubuntu-run.sh /usr/bin/run.sh
 RUN chmod +x /usr/bin/run.sh
 
 # Add .deb based Firefox instead of snap version
-COPY ./build/mozilla-firefox /etc/apt/preferences.d/
-RUN add-apt-repository ppa:mozillateam/ppa && \
+#COPY ./build/mozilla-firefox /etc/apt/preferences.d/
+#RUN add-apt-repository ppa:mozillateam/ppa && \
     #apt-get -y update && \
-    apt-get -y install firefox && \
-    apt autoremove -y && \
-    rm -rf /var/cache/apt /var/lib/apt/lists
+#    apt-get -y install firefox && \
+#    apt autoremove -y && \
+#    rm -rf /var/cache/apt /var/lib/apt/lists
 
 
 # https://github.com/danielguerra69/ubuntu-xrdp/blob/master/Dockerfile
-RUN mkdir /var/run/dbus && \
-    cp /etc/X11/xrdp/xorg.conf /etc/X11 && \
+#RUN mkdir /var/run/dbus && \
+RUN cp /etc/X11/xrdp/xorg.conf /etc/X11 && \
     sed -i "s/console/anybody/g" /etc/X11/Xwrapper.config && \
     sed -i "s/xrdp\/xorg/xorg/g" /etc/xrdp/sesman.ini && \
     echo "xfce4-session" >> /etc/skel/.Xsession
