@@ -9,6 +9,7 @@ RUN apt-get -y update && \
     apt-get install -y \
     software-properties-common \
     curl \
+    ssh \
     net-tools \
     xfce4 \
     xfce4-clipman-plugin \
